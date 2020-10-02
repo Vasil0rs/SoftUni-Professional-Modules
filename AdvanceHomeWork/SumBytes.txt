@@ -1,0 +1,22 @@
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+public class SumBytes {
+    public static void main(String[] args) throws IOException {
+        Path pathFile = Path.of("C:\\Users\\vasil\\OneDrive\\Desktop\\" +
+                "04. Java-Advanced-Files-and-Streams-Exercises-Resources\\input.txt");
+
+        long sum = 0;
+        byte[] bytes = Files.readAllBytes(pathFile);
+
+        for (byte symbol : bytes) {
+
+            if (symbol == 10 || symbol == 13) {
+                continue;
+            }
+            sum += symbol;
+        }
+        System.out.println(sum);
+    }
+}
