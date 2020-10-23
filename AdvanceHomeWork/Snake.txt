@@ -1,0 +1,122 @@
+import java.util.Scanner;
+
+public class Snake {
+    public static int food = 0;
+    public static int rowSnake = 0;
+    public static int colSnake = 0;
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int size = Integer.parseInt(scanner.nextLine());
+        char[][] field = new char[size][size];
+
+        int[] firstBurrowIndexes = {-1, -1};
+        int[] secondBurrowIndexes = {-1, -1};
+
+        for (int i = 0; i < size; i++) {
+            String line = scanner.nextLine();
+            if (line.contains("S")) {
+                rowSnake = i;
+                colSnake = line.indexOf("S");
+            }
+            filldBurrowIndexes(firstBurrowIndexes, secondBurrowIndexes, i, line);
+            field[i] = line.toCharArray();
+        }
+
+        while (food < 10) {
+            String command = scanner.nextLine();
+
+            if ("up".equals(command)) {
+                if (isOutOfBound(rowSnake - 1, colSnake, field)) {
+                    break;
+                } else {
+                    if (!moveSnake(rowSnake, colSnake, rowSnake - 1, colSnake, field)) {
+                        rowSnake--;
+                    }
+                }
+            } else if ("down".equals(command)) {
+                if (isOutOfBound(rowSnake + 1, colSnake, field)) {
+                    break;
+                } else {
+                    if (!moveSnake(rowSnake, colSnake, rowSnake + 1, colSnake, field)) {
+                        rowSnake++;
+                    }
+                }
+            } else if ("left".equals(command)) {
+                if (isOutOfBound(rowSnake, colSnake - 1, field)) {
+                    break;
+                } else {
+                    if (!moveSnake(rowSnake, colSnake, rowSnake, colSnake - 1, field)) {
+                        colSnake--;
+                    }
+                }
+            } else if ("right".equals(command)) {
+                if (isOutOfBound(rowSnake, colSnake + 1, field)) {
+                    break;
+                } else {
+                    if (!moveSnake(rowSnake, colSnake, rowSnake, colSnake + 1, field)) {
+                        colSnake++;
+                    }
+                }
+            }
+        }
+        if (food >= 10) {
+            System.out.println("You won! You fed the snake.");
+        } else {
+            field[rowSnake][colSnake] = '.';
+            System.out.println("Game over!");
+        }
+        System.out.println("Food eaten: " + food);
+        printMatrix(field);
+    }
+
+    private static boolean moveSnake(int oldRow, int oldCol, int newRow, int newCol, char[][] field) {
+        if (field[newRow][newCol] == '-') {
+            field[newRow][newCol] = 'S';
+        } else if (field[newRow][newCol] == '*') {
+            field[newRow][newCol] = 'S';
+            food++;
+        } else if (field[newRow][newCol] == 'B') {
+            for (int row = 0; row < field.length; row++) {
+                for (int col = 0; col < field[row].length; col++) {
+                    if (field[row][col] == 'B' && (row != newRow || col != newCol)) {
+                        field[row][col] = 'S';
+                        field[newRow][newCol] = '.';
+                        field[oldRow][oldCol] = '.';
+                        rowSnake = row;
+                        colSnake = col;
+                        return true;
+                    }
+                }
+            }
+        }
+        field[oldRow][oldCol] = '.';
+        return false;
+    }
+
+    private static boolean isOutOfBound(int row, int col, char[][] field) {
+        return row < 0 || row >= field.length || col < 0 || col >= field[row].length;
+    }
+
+    public static void filldBurrowIndexes(int[] firstBurrowIndexes, int[] secondBurrowIndexes, int i, String line) {
+        if (line.contains("B")) {
+            if (firstBurrowIndexes[0] == -1) {
+                firstBurrowIndexes[0] = i;
+                firstBurrowIndexes[1] = line.indexOf("B");
+            } else {
+                secondBurrowIndexes[0] = i;
+                secondBurrowIndexes[1] = line.indexOf("B");
+            }
+        }
+    }
+
+    public static void printMatrix(char[][] matrix) {
+        for (int row = 0; row < matrix.length; row++) {
+            for (int cow = 0; cow < matrix[row].length; cow++) {
+                System.out.print(matrix[row][cow]);
+            }
+            System.out.println();
+        }
+    }
+}
