@@ -1,0 +1,26 @@
+package HotelReservation;
+
+import java.util.Arrays;
+import java.util.Scanner;
+import java.util.stream.Stream;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        String[] line = scanner.nextLine().split("\\s+");
+        double pricePerDay = Double.parseDouble(line[0]);
+        int days = Integer.parseInt(line[1]);
+        String seasons = line[2];
+        String discounts = line[3];
+        Season season = Season.valueOf(seasons.toUpperCase());
+
+
+        season = Season.valueOf(seasons.toUpperCase());
+         Discount discount= Discount.valueOf(discounts.toUpperCase());
+        PriceCalculator priceCalculator = new PriceCalculator(season,discount , pricePerDay, days);
+        System.out.println(String.format("%.2f", priceCalculator.calculatePrice()));
+
+
+    }
+}
