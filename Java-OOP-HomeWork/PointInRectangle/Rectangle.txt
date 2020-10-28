@@ -1,0 +1,16 @@
+package PointInRectangle;
+
+public class Rectangle {
+    private Point2D leftBottom;
+    private Point2D topRight;
+
+    public Rectangle(Point2D leftBottom, Point2D topRight) {
+        this.leftBottom = leftBottom;
+        this.topRight = topRight;
+    }
+
+    public boolean contains(Point2D point) {
+        return this.leftBottom.isGreaterOrEqual(point)
+                && this.topRight.isLessOrEqual(point);
+    }
+}
