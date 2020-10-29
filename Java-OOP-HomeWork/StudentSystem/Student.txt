@@ -1,0 +1,37 @@
+package StudentSystem;
+
+public class Student {
+   private String studentName;
+   private int studentAge;
+   private double studentGrade;
+
+    public Student(String studentName, int studentAge, double studentGrade) {
+        this.studentName = studentName;
+        this.studentAge = studentAge;
+        this.studentGrade = studentGrade;
+    }
+
+    public String getStudentName() {
+        return this.studentName;
+    }
+
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
+    }
+
+    public int getStudentAge() {
+        return this.studentAge;
+    }
+
+    public void setStudentAge(int studentAge) {
+        this.studentAge = studentAge;
+    }
+
+    public double getStudentGrade() {
+        return this.studentGrade;
+    }
+
+    public void setStudentGrade(double studentGrade) {
+        this.studentGrade = studentGrade;
+    }
+}
