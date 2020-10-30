@@ -1,0 +1,18 @@
+package CardsWithPower;
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        String rankOfCard = scanner.nextLine();
+        String suitOfCard = scanner.nextLine();
+
+        int sum=CardsWithPower.valueOf(rankOfCard).getVALUE()+SuitPowers.valueOf(suitOfCard).getValue();
+
+        System.out.println(String.format("Card name: %s of %s; Card power: %d"
+                ,CardsWithPower.valueOf(rankOfCard),SuitPowers.valueOf(suitOfCard),sum ));
+
+    }
+}
