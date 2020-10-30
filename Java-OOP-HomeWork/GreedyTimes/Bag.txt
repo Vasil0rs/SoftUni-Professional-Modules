@@ -1,0 +1,99 @@
+package GreedyTimes;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Stream;
+
+public class Bag {
+    private long capacity;
+    private long currentWeight;
+    private long totalGold;
+    private long totalGems;
+    private Map<String, Long> gems;
+    private long totalCash;
+    private Map<String, Long> cash;
+
+    public Bag(long capacity) {
+        this.capacity = capacity;
+        this.currentWeight = 0;
+        this.totalGold = 0;
+        this.totalGems = 0;
+        this.gems = new HashMap<>();
+        this.totalCash = 0;
+        this.cash = new HashMap<>();
+    }
+
+    public void addCash(String currency, long quantity) {
+
+        if (hasFreeSpace(quantity) && this.totalGems >= this.totalCash + quantity) {
+             this.cash.putIfAbsent(currency,quantity);
+            this.totalCash += quantity;
+            this.currentWeight += quantity;
+        }
+    }
+
+    public void addGems(String gem, long quantity) {
+
+        if (hasFreeSpace(quantity) && this.totalGems + quantity <= this.totalGold) {
+            this.gems.putIfAbsent(gem,quantity);
+            this.totalGems += quantity;
+            this.currentWeight += quantity;
+        }
+    }
+
+    public void addGold(long quantity) {
+
+        if (hasFreeSpace(quantity)) {
+            this.totalGold += quantity;
+            this.currentWeight += quantity;
+        }
+    }
+
+    private boolean hasFreeSpace(long quantity) {
+        return this.currentWeight + quantity <= this.capacity;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder output = new StringBuilder();
+
+        if (this.totalGold > 0) {
+            output.append("<Gold> $").append(this.totalGold).append(System.lineSeparator());
+            output.append("##Gold - ").append(this.totalGold).append(System.lineSeparator());
+        }
+
+        if (this.gems.size() > 0) {
+            output.append("<Gem> $").append(this.totalGems).append(System.lineSeparator());
+            getSorted().forEach(entry -> {
+                output.append("##").append(entry.getKey()).append(" - ")
+                        .append(entry.getValue()).append(System.lineSeparator());
+            });
+        }
+
+        if (this.cash.size() > 0) {
+            output.append("<Cash> $").append(this.totalCash).append(System.lineSeparator());
+
+            this.cash.entrySet().stream().sorted((a, b) -> {
+                int result = b.getKey().compareTo(a.getKey());
+                if (result == 0) {
+                    result = a.getValue().compareTo(b.getValue());
+                }
+                return result;
+            }).forEach(entry -> {
+                output.append("##").append(entry.getKey()).append(" - ")
+                        .append(entry.getValue()).append(System.lineSeparator());
+            });
+        }
+        return output.toString().trim();
+    }
+
+    private Stream<Map.Entry<String, Long>> getSorted() {
+        return this.gems.entrySet().stream().sorted((a, b) -> {
+            int result = b.getKey().compareTo(a.getKey());
+            if (result == 0) {
+                result = a.getValue().compareTo(b.getValue());
+            }
+            return result;
+        });
+    }
+}
