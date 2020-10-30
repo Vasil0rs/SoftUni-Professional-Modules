@@ -1,0 +1,23 @@
+package TrafficLights;
+
+public class Lights {
+    private Color color;
+
+    public Lights(Color color) {
+        this.color = color;
+    }
+
+    public Color getColor() {
+        return this.color;
+    }
+
+    public void update() {
+        if (color == Color.RED) {
+            this.color = Color.GREEN;
+        } else if (color == Color.GREEN) {
+            this.color = Color.YELLOW;
+        } else if (color == Color.YELLOW) {
+            this.color = Color.RED;
+        }
+    }
+}
