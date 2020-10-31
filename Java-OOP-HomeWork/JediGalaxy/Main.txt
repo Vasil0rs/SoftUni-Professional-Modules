@@ -1,0 +1,80 @@
+package JediGalaxy;
+
+import java.util.Scanner;
+
+public class Main {
+    static int[][] matrix;
+    static long jediSum = 0L;
+    static int rows;
+    static int cols;
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        String[] dimensions = scanner.nextLine().split("\\s+");
+        rows = Integer.parseInt(dimensions[0]);
+        cols = Integer.parseInt(dimensions[1]);
+
+        matrix = new int[rows][cols];
+        buildMatrix();
+        String input = scanner.nextLine();
+
+        while (!input.equals("Let the Force be with you")) {
+
+            String[] coordinates = input.split("\\s+");
+            int jediRow = Integer.parseInt(coordinates[0]);
+            int jediCol = Integer.parseInt(coordinates[1]);
+
+            coordinates = scanner.nextLine().split("\\s+");
+            int evilRow = Integer.parseInt(coordinates[0]);
+            int evilCol = Integer.parseInt(coordinates[1]);
+
+            if (evilRow >= rows) {
+                int shiftValue = evilRow - rows + 1;
+                evilRow -= shiftValue;
+                evilCol -= shiftValue;
+            }
+
+            if (evilCol >= cols) {
+                int shiftValue = evilCol - cols + 1;
+                evilRow -= shiftValue;
+                evilCol -= shiftValue;
+            }
+
+            while (evilRow >= 0 && evilCol >= 0) {
+                matrix[evilRow][evilCol] = 0;
+                evilRow--;
+                evilCol--;
+            }
+
+            if (jediRow >= rows) {
+                int shiftValue = jediRow - rows + 1;
+                jediRow -= shiftValue;
+                jediCol += shiftValue;
+            }
+
+            if (jediCol < 0) {
+                int shiftValue = Math.abs(jediCol);
+                jediRow -= shiftValue;
+                jediCol += shiftValue;
+            }
+
+            while (jediRow >= 0 && jediCol < cols) {
+                jediSum += matrix[jediRow][jediCol];
+                jediRow--;
+                jediCol++;
+            }
+            input = scanner.nextLine();
+        }
+        System.out.println(jediSum);
+    }
+
+    static void buildMatrix() {
+        int counter = 0;
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < cols; col++) {
+                matrix[row][col] = counter++;
+            }
+        }
+    }
+}
