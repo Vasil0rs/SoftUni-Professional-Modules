@@ -1,0 +1,22 @@
+package PlayersAndMonsters;
+
+import PlayersAndMonsters.DarkWizard;
+
+public class SoulMaster extends DarkWizard {
+    private String username;
+    private int level;
+
+    public SoulMaster(String userName, int level) {
+        super(userName, level);
+    }
+
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    @Override
+    public int getLevel() {
+        return level;
+    }
+}

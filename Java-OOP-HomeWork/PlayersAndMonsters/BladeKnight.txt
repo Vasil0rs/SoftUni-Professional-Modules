@@ -1,0 +1,21 @@
+package PlayersAndMonsters;
+
+public class BladeKnight extends DarkKnight {
+
+    private String username;
+    private int level;
+
+    public BladeKnight(String userName, int level) {
+        super(userName, level);
+    }
+
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    @Override
+    public int getLevel() {
+        return level;
+    }
+}
