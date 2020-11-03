@@ -1,0 +1,19 @@
+package PlayersAndMonsters;
+
+public class Elf extends Hero {
+    private String username;
+    private int level;
+
+    public Elf(String userName, int level) {
+        super(userName, level);
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    @Override
+    public int getLevel() {
+        return level;
+    }
+}

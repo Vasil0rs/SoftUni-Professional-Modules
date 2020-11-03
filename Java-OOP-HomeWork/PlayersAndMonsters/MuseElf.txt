@@ -1,0 +1,22 @@
+package PlayersAndMonsters;
+
+import PlayersAndMonsters.Elf;
+
+public class MuseElf extends Elf {
+    private String username;
+    private int level;
+
+    public MuseElf(String userName, int level) {
+        super(userName, level);
+    }
+
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    @Override
+    public int getLevel() {
+        return level;
+    }
+}

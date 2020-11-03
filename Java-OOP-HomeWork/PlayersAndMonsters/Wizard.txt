@@ -1,0 +1,21 @@
+package PlayersAndMonsters;
+
+import PlayersAndMonsters.Hero;
+
+public class Wizard extends Hero {
+    private String username;
+    private int level;
+
+    public Wizard(String userName, int level) {
+        super(userName, level);
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    @Override
+    public int getLevel() {
+        return level;
+    }
+}

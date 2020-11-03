@@ -1,0 +1,20 @@
+package PlayersAndMonsters;
+
+public class DarkWizard extends Wizard {
+    private String username;
+    private int level;
+
+    public DarkWizard(String userName, int level) {
+        super(userName, level);
+    }
+
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    @Override
+    public int getLevel() {
+        return level;
+    }
+}
