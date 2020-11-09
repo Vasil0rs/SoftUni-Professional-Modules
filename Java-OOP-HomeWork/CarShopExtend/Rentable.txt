@@ -1,0 +1,6 @@
+package CarShopExtend;
+
+public interface Rentable {
+    Integer getMinRentDay();
+    double getPricePerDay();
+}
