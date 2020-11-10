@@ -1,0 +1,6 @@
+package DefineAnInterfacePerson;
+
+public interface Mashine {
+
+    String getModel();
+}
