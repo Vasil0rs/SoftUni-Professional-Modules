@@ -1,0 +1,47 @@
+package Vehicles;
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        String[] tokens = scanner.nextLine().split("\\s+");
+        double fuelQuantity = Double.parseDouble(tokens[1]);
+        double litersPerKm = Double.parseDouble(tokens[2]);
+        Vehicles car = new Car(fuelQuantity, litersPerKm);
+
+        tokens = scanner.nextLine().split("\\s+");
+        double fuel = Double.parseDouble(tokens[1]);
+        double consumption = Double.parseDouble(tokens[2]);
+        Vehicles truck = new Truck(fuel, consumption);
+
+
+        int n = Integer.parseInt(scanner.nextLine());
+
+        while (n-- > 0) {
+
+            String[] params = scanner.nextLine().split("\\s+");
+            String command = params[0];
+            double distance = Double.parseDouble(params[2]);
+
+            if (command.equals("Drive")) {
+                String vehicle = params[1];
+                if (vehicle.equals("Car")) {
+                    System.out.println(car.drive(distance));
+                } else  {
+                    System.out.println(truck.drive(distance));
+                }
+            } else if (command.equals("Refuel")) {
+                String vehicle = params[1];
+                if (vehicle.equals("Car")) {
+                    car.refuel(distance);
+                } else {
+                    truck.refuel(distance);
+                }
+            }
+        }
+        System.out.println(car.toString());
+        System.out.println(truck.toString());
+    }
+}
