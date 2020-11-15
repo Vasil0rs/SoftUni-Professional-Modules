@@ -1,0 +1,28 @@
+package BirthdayCelebrations;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        String input = scanner.nextLine();
+
+        while (!"End".equals(input)) {
+
+            String[] tokens = input.split("\\s+");
+            String name = tokens[1];
+            int age = Integer.parseInt(tokens[2]);
+            String id = tokens[3];
+            String birthDay = tokens[4];
+            Citizen citizen = new Citizen(name, age, id, birthDay);
+
+
+            input = scanner.nextLine();
+        }
+        int birthDate = Integer.parseInt(scanner.nextLine());
+
+    }
+}
