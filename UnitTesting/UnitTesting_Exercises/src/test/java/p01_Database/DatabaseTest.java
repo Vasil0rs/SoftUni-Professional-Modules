@@ -60,6 +60,11 @@ public class DatabaseTest {
         Integer[] numbers = {5, 4, 8, 14};
         Database database = new Database(numbers);
         database.remove();
-        Assert.assertEquals(3,database.getElements().length);
+        Integer[] elements = database.getElements();
+        Assert.assertEquals(numbers.length-1, elements.length);
+
+        for (int i = 0; i < elements.length; i++) {
+            Assert.assertEquals(elements[i],numbers[i]);
+        }
     }
 }
