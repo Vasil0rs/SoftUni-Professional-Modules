@@ -49,14 +49,14 @@ public abstract class PlayerImpl implements Player {
 
     @Override
     public void takeDamage(int points) {
-        if (this.armor - points > 0){
+        if (this.armor - points > 0) {
             this.armor -= points;
-        }else {
+        } else {
             int pointsToReduce = Math.abs(this.armor - points);
             this.armor = 0;
-            if (this.health - pointsToReduce > 0){
+            if (this.health - pointsToReduce > 0) {
                 this.health -= pointsToReduce;
-            }else {
+            } else {
                 this.health = 0;
                 this.isAlive = false;
             }
@@ -65,7 +65,7 @@ public abstract class PlayerImpl implements Player {
 
     @Override
     public boolean isAlive() {
-        return isAlive;
+        return this.health > 0;
     }
 
     @Override
