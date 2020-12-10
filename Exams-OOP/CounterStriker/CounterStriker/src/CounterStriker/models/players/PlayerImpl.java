@@ -65,7 +65,7 @@ public abstract class PlayerImpl implements Player {
 
     @Override
     public boolean isAlive() {
-        return this.health > 0;
+        return this.health>0;
     }
 
     @Override
