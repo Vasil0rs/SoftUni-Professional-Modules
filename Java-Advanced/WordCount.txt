@@ -1,0 +1,40 @@
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+public class WordCount {
+    public static void main(String[] args) throws IOException {
+        Path path = Path.of("C:\\Users\\vasil\\OneDrive\\Desktop\\" +
+                "04. Java-Advanced-Files-and-Streams-Exercises-Resources\\words.txt");
+
+        List<String> lines = Files.readAllLines(path);
+        Map<String, Integer> wordsCount = new LinkedHashMap<>();
+
+        for (String line : lines) {
+            String[] tokens = line.split("\\s+");
+            for (String world : tokens) {
+                wordsCount.put(world, 0);
+            }
+        }
+        Path pathFile = Path.of("C:\\Users\\vasil\\OneDrive\\Desktop\\" +
+                "04. Java-Advanced-Files-and-Streams-Exercises-Resources\\text.txt");
+
+        List<String> searchLines = Files.readAllLines(pathFile);
+
+        for (String line : searchLines) {
+            Arrays.stream(line.split("\\s+")).forEach(world -> {
+                if (wordsCount.containsKey(world)) {
+                    wordsCount.put(world, wordsCount.get(world) + 1);
+                }
+            });
+        }
+        for (Map.Entry<String, Integer> entry : wordsCount.entrySet()) {
+            System.out.println(entry.getKey()+" - "+entry.getValue() );
+        }
+
+    }
+}

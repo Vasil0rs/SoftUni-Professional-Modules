@@ -1,0 +1,34 @@
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.TreeMap;
+
+public class ProductShop {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        String input=scanner.nextLine();
+        Map<String,Map<String,Double>> cost=new TreeMap<>();
+
+        while (!"Revision".equals(input)) {
+
+            String[]tokens=input.split(", ");
+            String shop=tokens[0];
+            String product=tokens[1];
+            double price=Double.parseDouble(tokens[2]);
+
+             cost.putIfAbsent(shop,new LinkedHashMap<>());
+             cost.get(shop).put(product,price);
+
+            input=scanner.nextLine();
+        }
+        cost.entrySet().stream()
+                .forEach(e->{
+                    System.out.println(e.getKey()+"->");
+                    e.getValue().entrySet().stream()
+                            .forEach(entry->{
+                    System.out.println(String.format("Product: %s, Price: %.1f",entry.getKey(),entry.getValue()));
+                            });
+                });
+    }
+}

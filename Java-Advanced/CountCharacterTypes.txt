@@ -1,0 +1,40 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class CountCharacterTypes {
+    public static void main(String[] args) throws IOException {
+        String pathFile = "C:\\Users\\vasil\\OneDrive\\Desktop\\" +
+                "04. Java-Advanced-Files-and-Streams-Exercises-Resources\\input.txt";
+
+        int vowels = 0;
+        int consonants = 0;
+        int punctuation = 0;
+        String vowel = "aeiou";
+        String punctuations = "!,.?";
+        BufferedReader reader = new BufferedReader(new FileReader(pathFile));
+        String line = reader.readLine();
+
+        while (line != null) {
+            String[] worlds = line.split("\\s+");
+
+            for (String world : worlds) {
+                for (char symbol : world.toCharArray()) {
+
+                    if (vowel.contains(String.valueOf(symbol))) {
+                        vowels++;
+                    } else if (punctuations.contains(String.valueOf(symbol))) {
+                        punctuation++;
+                    } else {
+                        consonants++;
+                    }
+                }
+            }
+            line = reader.readLine();
+        }
+        reader.close();
+        System.out.println("Vowels: " + vowels);
+        System.out.println("Consonants: " + consonants);
+        System.out.println("Punctuation: " + punctuation);
+    }
+}
